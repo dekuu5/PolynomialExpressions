@@ -1,0 +1,14 @@
+//
+// Created by pc on 5/12/2023.
+//
+
+#ifndef POLYNOMIALEXPRESSIONS_MAIN_H
+#define POLYNOMIALEXPRESSIONS_MAIN_H
+
+
+class main {
+
+};
+
+
+#endif //POLYNOMIALEXPRESSIONS_MAIN_H
