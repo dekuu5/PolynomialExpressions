@@ -13,12 +13,12 @@ struct node {
 };
 
 node * creatTerm(int coef,int pow);
-void insert_term(node** head, int coef, int pow);
-node* sum_polynomials(node* head1, node* head2);
-node* multiply_polynomials(node* head1, node* head2);
-int evaluate_polynomial(node* head, int x);
+void insertTerm(node** head, int coef, int pow);
+//node* sum_polynomials(node* head1, node* head2);
+//node* multiply_polynomials(node* head1, node* head2);
+//int evaluate_polynomial(node* head, int x);
 
 
-void print_polynomial(struct Node* head);
+void printPolynomial(node* head);
 
 #endif //POLYNOMIALEXPRESSIONS_MAIN_H

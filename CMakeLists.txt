@@ -7,4 +7,6 @@ include_directories(.)
 
 add_executable(PolynomialExpressions
         main.cpp
-        main.h)
+        main.h
+        IO.cpp
+        node.cpp)
