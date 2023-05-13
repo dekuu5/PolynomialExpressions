@@ -4,7 +4,7 @@
 
 #ifndef POLYNOMIALEXPRESSIONS_MAIN_H
 #define POLYNOMIALEXPRESSIONS_MAIN_H
-
+#define lli  long long int
 
 struct node {
     int coef;
@@ -16,7 +16,7 @@ node * creatTerm(int coef,int pow);
 void insertTerm(node** head, node *term);
 //node* sum_polynomials(node* head1, node* head2);
 //node* multiply_polynomials(node* head1, node* head2);
-long long int evaluatePolynomial(node* head, int x);
+lli evaluatePolynomial(node* head, int x);
 int powerX(int x , int p);
 
 void printPolynomial(node* head);

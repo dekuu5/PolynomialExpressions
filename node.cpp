@@ -4,6 +4,7 @@
 #include <string>
 #include <stdlib.h>
 #include <math.h>
+#define lli  long long int
 
 node * creatTerm(int coef,int pow){
     node * n = (node *)malloc(sizeof(node));
@@ -30,8 +31,12 @@ void insertTerm(node** head, node *term){
     p->next = term;
 }
 
-long long int evaluatePolynomial(node* head, int x){
-    long long int result = 0;
+lli evaluatePolynomial(node* head, int x){
+    if (head == nullptr){
+        printf("can't evaluate an empty Polynomial\n");
+        return -0;
+    }
+    lli result = 0;
     node * p = head;
     while (p != nullptr){
         result += (p->coef) * powerX(x,p->power) ;
@@ -39,4 +44,6 @@ long long int evaluatePolynomial(node* head, int x){
     }
     return result;
 }
+
+
 
