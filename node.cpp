@@ -20,8 +20,7 @@ int powerX(int x , int p){
     return result;
 }
 
-void insertTerm(node** head, int coef, int pow){
-    node * term = creatTerm(coef,pow);
+void insertTerm(node** head, node *term){
     if (*head == nullptr){
         (*head) = term;
         return;
@@ -30,8 +29,9 @@ void insertTerm(node** head, int coef, int pow){
     while (p->next != nullptr) p = p->next;
     p->next = term;
 }
-int evaluatePolynomial(node* head, int x){
-    int result = 0;
+
+long long int evaluatePolynomial(node* head, int x){
+    long long int result = 0;
     node * p = head;
     while (p != nullptr){
         result += (p->coef) * powerX(x,p->power) ;
