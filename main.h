@@ -16,8 +16,8 @@ node * creatTerm(int coef,int pow);
 void insertTerm(node** head, int coef, int pow);
 //node* sum_polynomials(node* head1, node* head2);
 //node* multiply_polynomials(node* head1, node* head2);
-//int evaluate_polynomial(node* head, int x);
-
+int evaluatePolynomial(node* head, int x);
+int powerX(int x , int p);
 
 void printPolynomial(node* head);
 

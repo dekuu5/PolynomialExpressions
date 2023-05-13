@@ -1,11 +1,9 @@
 #include "main.h"
 #include <stdio.h>
-#include "IO.h"
-#include "node.h"
 
 
 int main(){
-    node * head  = creatTerm(4,5);
+    node * head  = nullptr;
     int coef,exp;
     int size;
     scanf("%d",&size);
@@ -15,5 +13,8 @@ int main(){
         insertTerm(&head,coef,exp);
     }
     printPolynomial(head);
+    int x;
+    scanf("%d",&x);
+    printf("the A( %d ) = %d", x, evaluatePolynomial(head,x));
     return 0;
 }

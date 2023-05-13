@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
-#include "node.h"
+#include "main.h"
 
 
 void printPolynomial(node* head){
