@@ -16,7 +16,7 @@ node * creatTerm(int coef,int pow);
 void insertTerm(node** head, node *term);
 node * copyPolynomial(node * exp);
 node * addPolynomials(node * exp1, node *exp2);
-node * miniMultiply(node *expr, node * term);
+node * recMultiply(node *expr, node * term);
 lli evaluatePolynomial(node* head, int x);
 int powerX(int x , int p);
 void freePolynomial(node* head);

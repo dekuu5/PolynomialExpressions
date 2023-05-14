@@ -75,16 +75,16 @@ node * recMultiply(node *expr, node * term){
             tmp->power += term->power;
             tmp = tmp->next;
         }
-        miniMultiply(expr, term->next);
+        recMultiply(expr, term->next);
     }
     return expr;
 }
 void freePolynomial(node* head){
-    node* temp;
-    while (head != NULL) {
-        temp = head;
+    node* p ;
+    while (head != nullptr) {
+        p = head;
         head = head->next;
-        free(temp);
+        free(p);
     }
 }
 

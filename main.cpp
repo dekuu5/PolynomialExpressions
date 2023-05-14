@@ -15,6 +15,7 @@ int getChoise(){
     printf("5. substitute with x\n");
     printf("6. Sum of the two expressions\n");
     printf("7. Product of the two expressions\n");
+    printf("8. free an expression\n");
     printf("8. Exit\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
@@ -102,7 +103,7 @@ int main(){
                 break;
             case 7:
                 printf("A(x) * B(x) = ");
-                product = miniMultiply(copyPolynomial(expression1), copyPolynomial(expression2));
+                product = recMultiply(copyPolynomial(expression1), copyPolynomial(expression2));
                 printPolynomial(product);
                 break;
             case 8:
@@ -110,8 +111,30 @@ int main(){
                 printf("2. free B(x)\n");
                 printf("3. free summation(x)\n");
                 printf("4. free product(x)\n Enter Choise :");
-                scanf("%d",choice);
-
+                int ch;
+                scanf("%d",&c);
+                fflush(stdin);
+                switch (c) {
+                    case 1:
+                        freePolynomial(expression1);
+                        printf("\n DONE \n");
+                        break;
+                    case 2:
+                        freePolynomial(expression2);
+                        printf("\n DONE \n");
+                        break;
+                    case 3:
+                        freePolynomial(summation);
+                        printf("\n DONE \n");
+                        break;
+                    case 5:
+                        freePolynomial(product);\
+                        printf("\n DONE \n");
+                        break;
+                    default:
+                        printf("Invalid choice. Please try again.\n");
+                }
+                break;
             case 9:
                 printf("\nGoodbye!\n");
                 return 0;
