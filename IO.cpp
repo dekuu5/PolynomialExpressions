@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-#include <stdlib.h>
-#include "main.h"
-#include <stdbool.h>
 using namespace std;
 
 

@@ -1,9 +1,6 @@
 #include "main.h"
 #include <stdio.h>
-#include <iostream>
-#include <string>
 #include <stdlib.h>
-#include <math.h>
 #define lli  long long int
 
 node * creatTerm(int coef,int pow){
