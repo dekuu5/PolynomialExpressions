@@ -69,7 +69,7 @@ int main(){
                 printPolynomial(expression1);
                 break;
             case 4:
-                printf("\nF(x) = ");
+                printf("\nB(x) = ");
                 printPolynomial(expression2);
                 break;
             case 5:
@@ -119,7 +119,7 @@ int main(){
                 printf("\n1. free A(x)\n");
                 printf("2. free B(x)\n");
                 printf("3. free summation(x)\n");
-                printf("4. free product(x)\n Enter Choise :");
+                printf("4. free product(x)\n Enter choice :");
                 int ch;
                 scanf("%d",&c);
                 fflush(stdin);
