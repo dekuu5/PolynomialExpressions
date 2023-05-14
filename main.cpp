@@ -2,23 +2,24 @@
 #include <stdio.h>
 #define lli  long long int
 #include <iostream>
-
 using namespace std;
 
 int getChoise(){
     int choice;
-
-    printf("1. Insert a term to expression A(x)\n");
-    printf("2. Insert a term to expression B(x)\n");
-    printf("3. Print expression A(x)\n");
-    printf("4. Print expression B(x)\n");
-    printf("5. substitute with x\n");
-    printf("6. Sum of the two expressions\n");
-    printf("7. Product of the two expressions\n");
-    printf("8. free an expression\n");
-    printf("8. Exit\n");
+    printf("\n-------------------------------------------\n");
+    printf("1. Insert a term to expression A(x)       #\n");
+    printf("2. Insert a term to expression B(x)       #\n");
+    printf("3. Print expression A(x)                  #\n");
+    printf("4. Print expression B(x)                  #\n");
+    printf("5. substitute with x                      #\n");
+    printf("6. Sum of the two expressions             #\n");
+    printf("7. Product of the two expressions         #\n");
+    printf("8. free an expression                     #\n");
+    printf("8. Exit                                   #\n");
+    printf("-------------------------------------------\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
+
     fflush(stdin);
     return choice;
 }
@@ -97,14 +98,22 @@ int main(){
                 }
                 break;
             case 6:
-                printf("A(x) + B(x) = ");
-                summation = addPolynomials(expression1,expression2);
-                printPolynomial(summation);
+                if (expression2 == nullptr || expression1 == nullptr){
+                    printf("can't do summation\n");
+                } else{
+                    printf("A(x) + B(x) = ");
+                    summation = addPolynomials(expression1,expression2);
+                    printPolynomial(summation);
+                }
                 break;
             case 7:
-                printf("A(x) * B(x) = ");
-                product = recMultiply(copyPolynomial(expression1), copyPolynomial(expression2));
-                printPolynomial(product);
+                if (expression2 == nullptr || expression1 == nullptr){
+                    printf("can't do multiplication\n");
+                } else{
+                    printf("A(x) * B(x) = ");
+                    product = recMultiply(copyPolynomial(expression1), copyPolynomial(expression2));
+                    printPolynomial(product);
+                }
                 break;
             case 8:
                 printf("\n1. free A(x)\n");
@@ -127,7 +136,7 @@ int main(){
                         freePolynomial(summation);
                         printf("\n DONE \n");
                         break;
-                    case 5:
+                    case 4:
                         freePolynomial(product);\
                         printf("\n DONE \n");
                         break;
