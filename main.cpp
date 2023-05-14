@@ -1,6 +1,9 @@
 #include "main.h"
 #include <stdio.h>
 #define lli  long long int
+#include <iostream>
+
+using namespace std;
 
 int getChoise(){
     int choice;
@@ -29,6 +32,15 @@ int getChoise2(){
     scanf("%d", &choice);
     fflush(stdin);
     return choice;
+}
+void cheakEval(node * expr, string type,int x){
+    lli result;
+    if (expr == nullptr){
+        printf("can't evaluate an empty Polynomial\n");
+    }else{
+        result = evaluatePolynomial(expr,x);
+        printf("the value of %s( %d ) = %lld\n", type.data(), x, result);
+    }
 }
 int main(){
     node * expression1 = nullptr;
@@ -65,39 +77,18 @@ int main(){
                 printf("Enter the value of x: ");
                 scanf("%d",&x);
                 fflush(stdin);
-                lli result;
                 switch (c) {
                     case 1:
-                        if (expression1 == nullptr){
-                            printf("can't evaluate an empty Polynomial\n");
-                        }else{
-                            result = evaluatePolynomial(expression1,x);
-                            printf("the value of A( %d ) = %lld\n", x, result);
-                        }
+                        cheakEval(expression1, "A", x);
                         break;
                     case 2:
-                        if (expression2 == nullptr){
-                            printf("can't evaluate an empty Polynomial\n");
-                        }else{
-                            result = evaluatePolynomial(expression2,x);
-                            printf("the value of B( %d ) = %lld\n", x, result);
-                        }
+                        cheakEval(expression2, "B", x);
                         break;
                     case 3:
-                        if (summation == nullptr){
-                            printf("can't evaluate an empty Polynomial\n");
-                        }else{
-                            result = evaluatePolynomial(summation,x);
-                            printf("the value of summation( %d ) = %lld\n", x, result);
-                        }
+                        cheakEval(summation, "summation", x);
                         break;
                     case 4:
-                        if (product == nullptr){
-                            printf("can't evaluate an empty Polynomial\n");
-                        }else{
-                            result = evaluatePolynomial(product,x);
-                            printf("the value of product( %d ) = %lld\n", x, result);
-                        }
+                        cheakEval(product, "product", x);
                         break;
                     default:
                         printf("Invalid choice. Please try again.\n");
@@ -106,17 +97,22 @@ int main(){
                 break;
             case 6:
                 printf("A(x) + B(x) = ");
-                //struct Node* sum_head = add_polynomials(expr1_head, expr2_head);
-                //print_polynomial(sum_head);
-                //free_polynomial(sum_head);
+                summation = addPolynomials(expression1,expression2);
+                printPolynomial(summation);
                 break;
             case 7:
                 printf("A(x) * B(x) = ");
-                //struct Node* product_head = multiply_polynomials(expr1_head, expr2_head);
-                //print_polynomial(product_head);
-                //free_polynomial(product_head);
+                product = miniMultiply(copyPolynomial(expression1), copyPolynomial(expression2));
+                printPolynomial(product);
                 break;
             case 8:
+                printf("\n1. free A(x)\n");
+                printf("2. free B(x)\n");
+                printf("3. free summation(x)\n");
+                printf("4. free product(x)\n Enter Choise :");
+                scanf("%d",choice);
+
+            case 9:
                 printf("\nGoodbye!\n");
                 return 0;
             default:

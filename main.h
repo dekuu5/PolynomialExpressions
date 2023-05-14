@@ -14,11 +14,12 @@ struct node {
 
 node * creatTerm(int coef,int pow);
 void insertTerm(node** head, node *term);
-//node* sum_polynomials(node* head1, node* head2);
-//node* multiply_polynomials(node* head1, node* head2);
+node * copyPolynomial(node * exp);
+node * addPolynomials(node * exp1, node *exp2);
+node * miniMultiply(node *expr, node * term);
 lli evaluatePolynomial(node* head, int x);
 int powerX(int x , int p);
-
+void freePolynomial(node* head);
 void printPolynomial(node* head);
 node* getTerm();
 
