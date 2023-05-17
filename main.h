@@ -5,6 +5,9 @@
 #ifndef POLYNOMIALEXPRESSIONS_MAIN_H
 #define POLYNOMIALEXPRESSIONS_MAIN_H
 #define lli  long long int
+#include <iostream>
+
+using namespace std;
 
 struct node {
     int coef;
@@ -22,6 +25,9 @@ int powerX(int x , int p);
 void freePolynomial(node* head);
 void printPolynomial(node* head);
 node* getTerm();
-
+bool validate2(string input);
+int getChoise();
+int getChoise2();
+void cheakEval(node * expr, string type,int x);
 
 #endif //POLYNOMIALEXPRESSIONS_MAIN_H
