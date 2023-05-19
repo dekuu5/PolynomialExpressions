@@ -172,9 +172,7 @@ node* getTail(node* head) {
 
     return current;
 }
-
-void insertSorted(node** head, node * n) {
-
+void insertSorted(node** head, node* n) {
     node* current = *head;
     if (*head == nullptr || n->power < current->power) {
         n->next = *head;
@@ -187,35 +185,33 @@ void insertSorted(node** head, node * n) {
     }
 
     n->next = current->next;
-    current->next = n ;
+    current->next = n;
 }
 
-
-
-node * sumTerms(node * head, vector<duplicate> dups){
-    if (dups.size() == 0){
+node* sumTerms(node* head, vector<duplicate> dups) {
+    if (dups.empty()) {
         return head;
     }
-    node * newHead = nullptr;
-    node *tmp2 = nullptr;
-    newHead = tmp2;
-    node *tmp = nullptr;
+
+    node* newHead = nullptr;
+    node* tmp = nullptr;
+    node* tmp2 = nullptr;
     int num = 0;
     int coef = 0;
+
     for (const auto& dup : dups) {
         num = dup.number;
         coef = 0;
         for (int j = 0; j < dup.frequency; ++j) {
             tmp = head;
-            while (tmp != nullptr){
-                if (tmp->power == num){
+            while (tmp != nullptr) {
+                if (tmp->power == num) {
                     coef += tmp->coef;
                     deleteNode(&head, tmp);
                     break;
                 }
                 tmp = tmp->next;
             }
-
         }
         if (newHead == nullptr) {
             newHead = creatTerm(coef, num);
@@ -225,11 +221,22 @@ node * sumTerms(node * head, vector<duplicate> dups){
             tmp2 = tmp2->next;
         }
     }
-    tmp = head;
-    while (tmp != nullptr){
-        insertSorted(&newHead, tmp);
-        tmp = tmp->next;
-    }
-    return newHead;
 
+    tmp = head;
+    while (tmp != nullptr) {
+        node* next = tmp->next;
+        insertSorted(&newHead, tmp);
+        tmp = next;
+    }
+
+
+    return newHead;
+}
+vector<duplicate> getDups(node * expression1){
+    int * arr;
+    int size ;
+    size = countNodes(expression1);
+    arr = getPowerInArray(expression1, size);
+    vector<duplicate> dup = findDuplicates(arr, &size);
+    return dup;
 }

@@ -4,28 +4,7 @@
 #include <iostream>
 using namespace std;
 
-vector<duplicate> test(node * expression1){
-    int * arr;
-    int size ;
-    size = countNodes(expression1);
-    arr = getPowerInArray(expression1, size);
-    for (int i = 0; i < size; ++i) {
-        printf("%d--",arr[i]);
-    }
-    printf("\n");
-    vector<duplicate> dup = findDuplicates(arr, &size);
-    std::cout << "Unique numbers: ";
-    for (int i = 0; i < size; ++i) {
-        printf("%d--",arr[i]);
-    }
-    printf("\n");
-    std::cout << "Duplicate numbers: " << std::endl;
-    for (int i = 0; i < dup.size(); i++) {
-        printf("%d %d\n", dup[i].number,dup[i].frequency);
-    }
 
-    return dup;
-}
 
 int main(){
 
@@ -42,28 +21,20 @@ int main(){
         switch (choice) {
             case 1:
                 term = getTerm();
-                insertTerm(&expression1, term);
-                break;
-            case 0:
-                test(expression1);
-                printf("\nA(x) = ");
-
-                printPolynomial(expression1);
-                break;
-            case 10:
-                test(expression1);
+                insertSorted(&expression1, term);
                 break;
             case 2:
                 term = getTerm();
-                insertTerm(&expression2, term);
+                insertSorted(&expression2, term);
                 break;
             case 3:
-                node * h;
-                h = sumTerms(expression1, test(expression1));
-                printPolynomial(h);
+                printf("\nA(x) = ");
+                expression1 = sumTerms(expression1, getDups(expression1));
+                printPolynomial(expression1);
                 break;
             case 4:
                 printf("\nB(x) = ");
+                expression2 = sumTerms(expression2, getDups(expression2));
                 printPolynomial(expression2);
                 break;
             case 5:
@@ -97,17 +68,21 @@ int main(){
                 } else{
                     printf("A(x) + B(x) = ");
                     summation = addPolynomials(expression1,expression2);
+                    summation = sumTerms(summation, getDups(summation));
                     printPolynomial(summation);
                 }
                 break;
             case 7:
                 if (expression2 == nullptr || expression1 == nullptr){
                     printf("can't do multiplication\n");
-                } else{
-                    printf("A(x) * B(x) = ");
+                } else if (countNodes(expression1) > countNodes(expression2)){
                     product = recMultiply(copyPolynomial(expression1), copyPolynomial(expression2));
-                    printPolynomial(product);
+                } else{
+                    product = recMultiply(copyPolynomial(expression2), copyPolynomial(expression1));
                 }
+                product = sumTerms(product, getDups(product));
+                printf("A(x) * B(x) = ");
+                printPolynomial(product);
                 break;
             case 8:
                 printf("\n1. free A(x)\n");

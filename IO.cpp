@@ -78,18 +78,35 @@ void printPolynomial(node* head){
         printf("Polynomial is empty.\n");
         return;
     }
-    if (current->coef > 0) {
+    if (current->power == 0){
+        if (current->coef > 0) {
+            printf(" %d", current->coef);
+        } else if (current->coef < 0) {
+            printf(" - %dx", -1 * current->coef);
+        }
+    }else {
+        if (current->coef > 0) {
         printf("%dx^%d", current->coef, current->power);
     } else if (current->coef < 0) {
         printf("- %dx^%d", -1 * current->coef, current->power);
-    }
+    }}
     current = current->next;
     while (current != nullptr) {
-        if (current->coef > 0) {
+        if (current->power == 0){
+            if (current->coef > 0) {
+                printf(" + %d", current->coef);
+            } else if (current->coef < 0) {
+                printf(" - %dx", -1 * current->coef);
+            }
+        }
+        else {
+            if (current->coef > 0) {
             printf(" + %dx^%d", current->coef, current->power);
         } else if (current->coef < 0) {
             printf(" - %dx^%d", -1 * current->coef, current->power);
         }
+
+    }
         current = current->next;
     }
     printf("\n");

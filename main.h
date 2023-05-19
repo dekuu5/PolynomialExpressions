@@ -37,8 +37,9 @@ void cheakEval(node * expr, string type,int x);
 
 void deleteNode(node** head, node* toBeDeleted);
 vector<duplicate> findDuplicates(int *arr, int *arrCount);
+vector<duplicate> getDups(node * expression1);
 node * sumTerms(node * head, vector<duplicate> dups);
-
+void insertSorted(node** head, node* n);
 //void findDuplicated(int *arr, int count);
 int * getPowerInArray(node * head, int count);
 int countNodes(node* head);
