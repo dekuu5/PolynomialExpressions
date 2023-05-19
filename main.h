@@ -6,7 +6,7 @@
 #define POLYNOMIALEXPRESSIONS_MAIN_H
 #define lli  long long int
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 struct node {
@@ -14,6 +14,11 @@ struct node {
     int power;
     node* next;
 };
+struct duplicate {
+    int number;
+    int frequency;
+};
+
 
 node * creatTerm(int coef,int pow);
 void insertTerm(node** head, node *term);
@@ -29,5 +34,13 @@ bool validate2(string input);
 int getChoise();
 int getChoise2();
 void cheakEval(node * expr, string type,int x);
+
+void deleteNode(node** head, node* toBeDeleted);
+vector<duplicate> findDuplicates(int *arr, int *arrCount);
+node * sumTerms(node * head, vector<duplicate> dups);
+
+//void findDuplicated(int *arr, int count);
+int * getPowerInArray(node * head, int count);
+int countNodes(node* head);
 
 #endif //POLYNOMIALEXPRESSIONS_MAIN_H

@@ -7,13 +7,19 @@ using namespace std;
 
 bool validate(string input, const string type){
     char c;
+    if (input.length()< 1 || input.length()> 7){
+        return false;
+    }
     if(type == "coef"){
+        int dashCount = 0;
         for (int i = 0; i < input.length(); ++i) {
             c = input[i];
-            if (!(isdigit(c) || c == '-')) {
+            if (!(isdigit(c) || c == '-')  || dashCount > 1) {
                 cout << "Invalid input. Please enter a non-zero integer." << endl;
                 fflush(stdin);
                 return false;
+            } else if (c == '-'){
+                dashCount++;
             }
         }
     } else if (type == "power"){
@@ -33,7 +39,10 @@ node* getTerm(){
 
     while (true) {
         cout << "Enter the coefficient: ";
-
+        getline(cin, input);
+        if (validate(input,"coef")){
+            coef = stoi(input);
+        } else continue;
 
         if (coef == 0) {
             cout << "Invalid input. Please enter a non-zero integer." << endl;
@@ -86,9 +95,11 @@ void printPolynomial(node* head){
     printf("\n");
 }
 bool validate2(string input){
+    if (input.length()< 1){
+        return false;
+    }
     for (int i = 0; i < input.length(); ++i) {
         if (!isdigit(input[i])) {
-            fflush(stdin);
             return false;
         }
     }
@@ -111,6 +122,7 @@ int getChoise(){
     printf("-------------------------------------------\n");
     printf("Enter your choice: ");
     getline(cin, choice);
+    fflush(stdin);
     if (validate2(choice)){
         c = stoi(choice);
         return c;

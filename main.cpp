@@ -4,9 +4,31 @@
 #include <iostream>
 using namespace std;
 
+vector<duplicate> test(node * expression1){
+    int * arr;
+    int size ;
+    size = countNodes(expression1);
+    arr = getPowerInArray(expression1, size);
+    for (int i = 0; i < size; ++i) {
+        printf("%d--",arr[i]);
+    }
+    printf("\n");
+    vector<duplicate> dup = findDuplicates(arr, &size);
+    std::cout << "Unique numbers: ";
+    for (int i = 0; i < size; ++i) {
+        printf("%d--",arr[i]);
+    }
+    printf("\n");
+    std::cout << "Duplicate numbers: " << std::endl;
+    for (int i = 0; i < dup.size(); i++) {
+        printf("%d %d\n", dup[i].number,dup[i].frequency);
+    }
 
+    return dup;
+}
 
 int main(){
+
     node * expression1 = nullptr;
     node * expression2 = nullptr;
     node * summation = nullptr;
@@ -22,13 +44,23 @@ int main(){
                 term = getTerm();
                 insertTerm(&expression1, term);
                 break;
+            case 0:
+                test(expression1);
+                printf("\nA(x) = ");
+
+                printPolynomial(expression1);
+                break;
+            case 10:
+                test(expression1);
+                break;
             case 2:
                 term = getTerm();
                 insertTerm(&expression2, term);
                 break;
             case 3:
-                printf("\nA(x) = ");
-                printPolynomial(expression1);
+                node * h;
+                h = sumTerms(expression1, test(expression1));
+                printPolynomial(h);
                 break;
             case 4:
                 printf("\nB(x) = ");
