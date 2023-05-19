@@ -135,7 +135,7 @@ int getChoise(){
     printf("6. Sum of the two expressions             #\n");
     printf("7. Product of the two expressions         #\n");
     printf("8. free an expression                     #\n");
-    printf("8. Exit                                   #\n");
+    printf("9. Exit                                   #\n");
     printf("-------------------------------------------\n");
     printf("Enter your choice: ");
     getline(cin, choice);
