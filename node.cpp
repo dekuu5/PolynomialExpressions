@@ -3,91 +3,50 @@
 #include <stdlib.h>
 #include <bits/stdc++.h>
 #include <iostream>
-#define lli  long long int
 using namespace std;
 
-node * creatTerm(int coef,int pow){
+node * creatTerm(float coef,int pow){
     node * n = (node *)malloc(sizeof(node));
     n->coef = coef;
     n->power= pow;
     n->next = nullptr;
     return n;
 }
-int powerX(int x , int p){
-    int result = 1;
+float powerX(float x , int p){
+    float result = 1;
     for (int i = 0; i < p; ++i) {
         result *= x;
     }
     return result;
 }
 
-void insertTerm(node** head, node *term){
-    if (*head == nullptr){
-        (*head) = term;
+void insertSorted(node** head, node* n) {
+    node* current = *head;
+    if (*head == nullptr || n->power < current->power) {
+        n->next = *head;
+        *head = n;
         return;
     }
-    node *p = *head;
-    while (p->next != nullptr) p = p->next;
-    p->next = term;
-}
 
-lli evaluatePolynomial(node* head, int x){
-    if (head == nullptr){
-        printf("can't evaluate an empty Polynomial\n");
-        return -0;
+    while (current->next != nullptr && current->next->power < n->power) {
+        current = current->next;
     }
-    lli result = 0;
-    node * p = head;
-    while (p != nullptr){
-        result += (p->coef) * powerX(x,p->power) ;
-        p = p->next;
-    }
-    return result;
-}
 
-
-node * copyPolynomial(node * expr){
-    node * copy = creatTerm(expr->coef,expr->power);
-    node *p = expr->next;
-    node *tmp = copy;
-    while (p!= nullptr){
-        tmp->next = creatTerm(p->coef,p->power);
-        tmp = tmp->next;
-        p = p->next;
+    n->next = current->next;
+    current->next = n;
+}
+node* getTail(node* head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head;
     }
-    return copy;
 
-}
-node * addPolynomials(node * exp1, node *exp2){
-    node* copy1 = copyPolynomial(exp1);
-    node* copy2 = copyPolynomial(exp2);
-    node * tmp = copy1;
-    while (tmp->next != nullptr) tmp = tmp->next;
-    tmp->next = copy2;
-    return copy1;
-}
-node * recMultiply(node *expr, node * term){
-    if(term == nullptr){
-    } else {
-        node * tmp = expr;
-        while (tmp != nullptr){
-            tmp->coef *= term->coef;
-            tmp->power += term->power;
-            tmp = tmp->next;
-        }
-        recMultiply(expr, term->next);
+    node* current = head;
+    while (current->next != nullptr) {
+        current = current->next;
     }
-    return expr;
-}
-void freePolynomial(node* head){
-    node* p ;
-    while (head != nullptr) {
-        p = head;
-        head = head->next;
-        free(p);
-    }
-}
 
+    return current;
+}
 int countNodes(node* head) {
     int count = 0;
     node* current = head;
@@ -115,6 +74,43 @@ void deleteNode(node** head, node* toBeDeleted){
         free(toBeDeleted);
     }
 }
+float evaluatePolynomial(node* head, float x){
+    if (head == nullptr){
+        printf("can't evaluate an empty Polynomial\n");
+    }
+    float result = 0;
+    node * p = head;
+    while (p != nullptr){
+        result += (p->coef) * powerX(x,p->power) ;
+        p = p->next;
+    }
+    return result;
+}
+
+
+node * copyPolynomial(node * expr){
+    node * copy = creatTerm(expr->coef,expr->power);
+    node *p = expr->next;
+    node *tmp = copy;
+    while (p!= nullptr){
+        tmp->next = creatTerm(p->coef,p->power);
+        tmp = tmp->next;
+        p = p->next;
+    }
+    return copy;
+
+}
+
+void freePolynomial(node* head){
+    node* p ;
+    while (head != nullptr) {
+        p = head;
+        head = head->next;
+        free(p);
+    }
+}
+
+
 int * getPowerInArray(node * head, int count){
     int * arr = (int *) malloc(sizeof(int)*count);
     int c = 0;
@@ -160,33 +156,8 @@ vector<duplicate> findDuplicates(int *arr, int *arrCount) {
     return duplicates;
 }
 
-node* getTail(node* head) {
-    if (head == nullptr || head->next == nullptr) {
-        return head;
-    }
 
-    node* current = head;
-    while (current->next != nullptr) {
-        current = current->next;
-    }
 
-    return current;
-}
-void insertSorted(node** head, node* n) {
-    node* current = *head;
-    if (*head == nullptr || n->power < current->power) {
-        n->next = *head;
-        *head = n;
-        return;
-    }
-
-    while (current->next != nullptr && current->next->power < n->power) {
-        current = current->next;
-    }
-
-    n->next = current->next;
-    current->next = n;
-}
 
 node* sumTerms(node* head, vector<duplicate> dups) {
     if (dups.empty()) {
@@ -197,7 +168,7 @@ node* sumTerms(node* head, vector<duplicate> dups) {
     node* tmp = nullptr;
     node* tmp2 = nullptr;
     int num = 0;
-    int coef = 0;
+    float coef = 0;
 
     for (const auto& dup : dups) {
         num = dup.number;
@@ -239,4 +210,26 @@ vector<duplicate> getDups(node * expression1){
     arr = getPowerInArray(expression1, size);
     vector<duplicate> dup = findDuplicates(arr, &size);
     return dup;
+}
+
+node * addPolynomials(node * exp1, node *exp2){
+    node* copy1 = copyPolynomial(exp1);
+    node* copy2 = copyPolynomial(exp2);
+    node * tmp = copy1;
+    while (tmp->next != nullptr) tmp = tmp->next;
+    tmp->next = copy2;
+    return copy1;
+}
+node * recMultiply(node *expr, node * term){
+    if(term == nullptr){
+    } else {
+        node * tmp = expr;
+        while (tmp != nullptr){
+            tmp->coef *= term->coef;
+            tmp->power += term->power;
+            tmp = tmp->next;
+        }
+        recMultiply(expr, term->next);
+    }
+    return expr;
 }

@@ -4,13 +4,12 @@
 
 #ifndef POLYNOMIALEXPRESSIONS_MAIN_H
 #define POLYNOMIALEXPRESSIONS_MAIN_H
-#define lli  long long int
 #include <iostream>
 #include <vector>
 using namespace std;
 
 struct node {
-    int coef;
+    float coef;
     int power;
     node* next;
 };
@@ -19,28 +18,25 @@ struct duplicate {
     int frequency;
 };
 
-
-node * creatTerm(int coef,int pow);
-void insertTerm(node** head, node *term);
+node* getTerm();
+node * creatTerm(float coef,int pow);
 node * copyPolynomial(node * exp);
 node * addPolynomials(node * exp1, node *exp2);
 node * recMultiply(node *expr, node * term);
-lli evaluatePolynomial(node* head, int x);
-int powerX(int x , int p);
+float evaluatePolynomial(node* head, float x);
+float powerX(float x , int p);
 void freePolynomial(node* head);
 void printPolynomial(node* head);
-node* getTerm();
 bool validate2(string input);
 int getChoise();
 int getChoise2();
-void cheakEval(node * expr, string type,int x);
+void cheakEval(node * expr, string type,float x);
 
 void deleteNode(node** head, node* toBeDeleted);
 vector<duplicate> findDuplicates(int *arr, int *arrCount);
 vector<duplicate> getDups(node * expression1);
 node * sumTerms(node * head, vector<duplicate> dups);
 void insertSorted(node** head, node* n);
-//void findDuplicated(int *arr, int count);
 int * getPowerInArray(node * head, int count);
 int countNodes(node* head);
 

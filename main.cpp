@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdio.h>
-#define lli  long long int
 #include <iostream>
 using namespace std;
 
@@ -38,11 +37,13 @@ int main(){
                 printPolynomial(expression2);
                 break;
             case 5:
-                int c, x;
+                int c;
+                float x;
                 c = getChoise2();
                 x = 0;
                 printf("Enter the value of x: ");
-                scanf("%d",&x);
+
+                scanf("%f",&x);
                 fflush(stdin);
                 switch (c) {
                     case 1:

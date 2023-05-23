@@ -12,14 +12,20 @@ bool validate(string input, const string type){
     }
     if(type == "coef"){
         int dashCount = 0;
+        int dotCount = 0;
         for (int i = 0; i < input.length(); ++i) {
             c = input[i];
-            if (!(isdigit(c) || c == '-')  || dashCount > 1) {
-                cout << "Invalid input. Please enter a non-zero integer." << endl;
+            if (!(isdigit(c) || c == '-' || c == '.')  || dashCount > 1 || dotCount > 1) {
+                cout << "Invalid input. Please enter a non-zero float number." << endl;
                 fflush(stdin);
                 return false;
-            } else if (c == '-'){
+            }
+            else if ( c == '-' && i != 0){
+                dashCount += 5;
+            }else if (c == '-'){
                 dashCount++;
+            } else if ( c == '.') {
+                dotCount++;
             }
         }
     } else if (type == "power"){
@@ -34,18 +40,26 @@ bool validate(string input, const string type){
     return true;
 }
 node* getTerm(){
-    int coef, pow;
+    int pow;
+    float coef;
     string input;
 
     while (true) {
         cout << "Enter the coefficient: ";
         getline(cin, input);
         if (validate(input,"coef")){
-            coef = stoi(input);
+            try {
+                coef = stof(input);
+            } catch (...) {
+                cout << "Invalid input. Please enter a non-zero float number." << endl;
+
+                continue;
+            }
+
         } else continue;
 
         if (coef == 0) {
-            cout << "Invalid input. Please enter a non-zero integer." << endl;
+            cout << "Invalid input. Please enter a non-zero float number." << endl;
 
             continue;
         }
@@ -80,33 +94,23 @@ void printPolynomial(node* head){
     }
     if (current->power == 0){
         if (current->coef > 0) {
-            printf(" %d", current->coef);
+            printf(" %.3f", current->coef);
         } else if (current->coef < 0) {
-            printf(" - %dx", -1 * current->coef);
+            printf(" - %.3fx", -1 * current->coef);
         }
     }else {
         if (current->coef > 0) {
-        printf("%dx^%d", current->coef, current->power);
-    } else if (current->coef < 0) {
-        printf("- %dx^%d", -1 * current->coef, current->power);
-    }}
+            printf("%.3fx^%d", current->coef, current->power);
+        } else if (current->coef < 0) {
+            printf("- %.3fx^%d", -1 * current->coef, current->power);
+        }}
     current = current->next;
     while (current != nullptr) {
-        if (current->power == 0){
-            if (current->coef > 0) {
-                printf(" + %d", current->coef);
-            } else if (current->coef < 0) {
-                printf(" - %dx", -1 * current->coef);
-            }
-        }
-        else {
-            if (current->coef > 0) {
-            printf(" + %dx^%d", current->coef, current->power);
+        if (current->coef > 0) {
+            printf(" + %.3fx^%d", current->coef, current->power);
         } else if (current->coef < 0) {
-            printf(" - %dx^%d", -1 * current->coef, current->power);
+            printf(" - %.3fx^%d", -1 * current->coef, current->power);
         }
-
-    }
         current = current->next;
     }
     printf("\n");
@@ -161,12 +165,12 @@ int getChoise2(){
     fflush(stdin);
     return choice;
 }
-void cheakEval(node * expr, string type,int x){
-    lli result;
+void cheakEval(node * expr, string type,float x){
+    float result;
     if (expr == nullptr){
         printf("can't evaluate an empty Polynomial\n");
     }else{
         result = evaluatePolynomial(expr,x);
-        printf("the value of %s( %d ) = %lld\n", type.data(), x, result);
+        printf("the value of %s( %.3f ) = %.3f\n", type.data(), x, result);
     }
 }
